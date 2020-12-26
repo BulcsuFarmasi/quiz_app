@@ -42,6 +42,8 @@ class _MyAppState extends State<MyApp> {
     });
     if (_questionIndex < questions.length) {
       print('We have more questions!');
+    } else {
+      print('No more questions!');
     }
     print(_questionIndex);
   }
@@ -55,14 +57,18 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('My First App')),
-        body: Column(
-          children: <Widget>[
-            Question(questions[_questionIndex]['questionText']),
-            ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
-              return Answer(answer, _answerQuestion);
-            }).toList(),
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: <Widget>[
+                  Question(questions[_questionIndex]['questionText']),
+                  ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
+                    return Answer(answer, _answerQuestion);
+                  }).toList(),
+                ],
+              )
+            : Center(
+                child: Text('You did it!'),
+              ),
       ),
     );
   }
