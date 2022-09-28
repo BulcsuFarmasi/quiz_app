@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 
-import './answer.dart';
-import './question.dart';
+import 'package:quiz_app/answer.dart';
+import 'package:quiz_app/question.dart';
+import 'package:quiz_app/models/question.dart' as question;
 
 class Quiz extends StatelessWidget {
-  final List<Map<String, Object>> questions;
+  final List<question.Question> questions;
   final int questionIndex;
   final Function answerQuestion;
 
-  Quiz({required this.answerQuestion, required this.questions, required this.questionIndex});
+  const Quiz({
+    required this.answerQuestion,
+    required this.questions,
+    required this.questionIndex,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Question(questions[questionIndex]['questionText'] as String?),
-        ...(questions[questionIndex]['answers'] as List<Map<String, Object>>).map((answer) {
-          return Answer(answer['text'] as String?, () => answerQuestion(answer['score']));
+        Question(questions[questionIndex].questionText),
+        ...(questions[questionIndex].answers).map((answer) {
+          return Answer(answer.text, () => answerQuestion(answer.score));
         }).toList(),
       ],
     );
