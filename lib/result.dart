@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
   final int resultScore;
-  final Function resetHandler;
+  final ResetHandler resetHandler;
 
   Result(this.resultScore, this.resetHandler);
 
@@ -40,3 +40,5 @@ class Result extends StatelessWidget {
     );
   }
 }
+
+typedef ResetHandler = void Function();
